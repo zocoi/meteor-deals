@@ -1,0 +1,65 @@
+<head>
+  <title>FirstApp</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+</head>
+
+<body>
+	<div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        {{> navbar}}
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    {{> index}}
+  </div>
+</body>
+
+
+<template name="navbar">
+  <a class="brand" href="#">Stop sending Santa individual letter. Here is a kick-ass Santa list.</a>
+  <div class="nav-collapse">
+    <ul class="nav">
+      <li><a href="#" title="Coming soon...">Github</a></li>
+      <li><a href="#">{{loginButtons}}</a></li>
+    </ul>
+  </div>
+</template>
+
+<template name="index">
+  <h1 id="dear_santa">Dear Santa</h1>
+  <p>I have been very good this year. Here is my wish list. Also with deals to save your money.</p>
+  <table class="table table-hover">
+    {{#each deals}}
+      {{> entry}}
+    {{/each}}
+  </table>
+</template>
+
+<template name="entry">
+  <tr class="deal">
+    <td class="deal_image"><div class="img-polaroid" style="background-image: url({{photoUrl}})"></div></td>
+    <td>
+      <h5 class="title">{{title}}</h6>
+      <p>{{truncatedDescription}}</p>
+      <p class="muted">{{division.name}}</p>
+    </td>
+    <td><span class="from_price">${{fromPrice}}</span></td>
+    <td><span class="price">${{price}}</span></td>
+    <td>
+      <a class="btn-vote-up btn" href="#" title="I want this!" data-id="{{_id}}">
+        <i class="icon-thumbs-up"></i> {{userIds.length}}
+      </a>
+    </td>
+    <td>
+      {{#each latestUsers}}
+        <img src="{{avatarUrl}}" alt="" />
+      {{/each}}
+    </td>
+  </tr> 
+</template>

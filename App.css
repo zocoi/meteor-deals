@@ -1,0 +1,33 @@
+/* CSS declarations go here */
+
+#login-sign-in-link {
+  float: none;
+  color: #777;
+  text-decoration: none;
+  text-shadow: 0 1px 0 white;
+}
+
+.deal {
+  
+}
+  .deal_image div {
+    width: 120px; height: 120px;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .deal_image img {
+/*    max-width: 100px;
+    max-height: 100px;*/
+    display: none;
+  }
+  .title { color: #0185C6; }
+
+  .price {
+    color: #89B556;
+  }
+  
+  .from_price {
+    text-decoration: line-through;
+    color: #949494;
+  }
