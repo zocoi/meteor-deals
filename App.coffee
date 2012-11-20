@@ -9,9 +9,13 @@ if Meteor.isClient
     Deals.find({}, sort: [["votes", "desc"]])
 
   Template.index.events({
-    "submit #form": ->
+    "submit #deal_form": ->
       value = $("#text-input").val()
-      $("#text-holder").append(value)
+      obj = {}
+      for el in $('#deal_form').serializeArray()
+        obj[el.name] = el.value
+      console.log obj
+      Meteor.call "createDeal", obj, Meteor.userId()
       return false
   })
 

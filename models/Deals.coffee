@@ -22,21 +22,22 @@ Deals.allow
 
 Meteor.methods
 
-  createDeal: (options) ->
+  createDeal: (options, userId) ->
     options = options or {}
-
-    throw new Meteor.Error(400, "Required parameter missing") unless typeof options.title is "string" and options.title.length and 
-      typeof options.description is "string" and options.description.length and 
-      typeof options.url is "string" and options.url.length and 
-      typeof options.price is "number" and options.price >= 0 and 
-      typeof options.photoUrl is "string" and options.photoUrl.length
-    throw new Meteor.Error(403, "You must be logged in")  unless @userId
+    console.log "options", options
+    for name in ["title", "description", "url", "price", "photoUrl"]
+      throw new Meteor.Error(400, "Required parameter missing: #{name}") if options[name] is null 
+      # typeof options.description is "string" and options.description.length and 
+      # typeof options.url is "string" and options.url.length and 
+      # typeof options.price is "number" and options.price >= 0 and 
+      # typeof options.photoUrl is "string" and options.photoUrl.length
+    throw new Meteor.Error(403, "You must be logged in")  unless userId
     Deals.insert
       title: options.title
       description: options.description
       url: options.url
-      price: options.price
-      fromPrice: options.fromPrice
+      price: parseInt(options.price)
+      fromPrice: parseInt(options.fromPrice)
       photoUrl: options.photoUrl
       userIds: []
       ownerId: null

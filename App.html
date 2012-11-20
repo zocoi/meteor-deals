@@ -45,17 +45,58 @@
       {{> entry}}
     {{/each}}
   </table>
+  <form class="form-horizontal" id="deal_form">
+    <fieldset>
+      <legend>Know an online deal? Share it</legend>
+      <div class="control-group">
+        <div class="controls">
+          <input name="title" type="text" placeholder="Title">
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <input type="text" name="description" placeholder="Description">
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <input type="text" name="price" placeholder="Price" />
+          <input type="text" name="fromPrice" placeholder="Original Price (optional)" />
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <input type="text" name="url" placeholder="Url" />
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <input type="text" name="photoUrl" placeholder="Photo Url" />
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn">Submit</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
 </template>
 
 <template name="entry">
   <tr class="deal">
-    <td class="deal_image"><div class="img-polaroid" style="background-image: url({{photoUrl}})"></div></td>
+    <td class="deal_image">
+      <a href="{{url}}" target="_blank">
+        <div class="img-polaroid" style="background-image: url({{photoUrl}})"></div>
+      </a>
+    </td>
     <td>
-      <h5 class="title">{{title}}</h6>
+      <h5 class="title"><a href="{{url}}" target="_blank">{{title}}</a></h6>
       <p>{{truncatedDescription}}</p>
       <p class="muted">{{division.name}}</p>
     </td>
-    <td><span class="from_price">${{fromPrice}}</span></td>
+    <td><span class="from_price">{{#if fromPrice}}${{fromPrice}}{{/if}}</span></td>
     <td><span class="price">${{price}}</span></td>
     <td>
       <a class="btn-vote-up btn" href="#" title="I want this!" data-id="{{_id}}">
