@@ -50,7 +50,9 @@ if Meteor.isClient
   Template.entry.avatarUrl = ()->
     user = this
     if user.services?.facebook?.id
-      "http://graph.facebook.com/#{user.services.facebook.id}/picture"
+      return "http://graph.facebook.com/#{user.services.facebook.id}/picture"
+    else if user.services?.twitter?.screenName
+      return "http://api.twitter.com/1/users/profile_image?screen_name=#{user.services.twitter.screenName}&size=bigger"
     else
       null    
 
