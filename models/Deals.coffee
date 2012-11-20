@@ -7,9 +7,8 @@ Deals.allow
     false # no cowboy inserts -- use createDeal method
 
   update: (userId, deals, fields, modifier) ->
-    _.all parties, (party) ->
-      return false  if userId isnt party.owner # not the owner
-      allowed = ["title", "description", "x", "y"]
+    _.all deals, (deal) ->
+      allowed = ["title", "description"]
       return false  if _.difference(fields, allowed).length # tried to write to forbidden field
       
       # A good improvement would be to validate the type of the new
@@ -19,11 +18,7 @@ Deals.allow
 
 
   remove: (userId, parties) ->
-    not _.any(parties, (party) ->
-      
-      # deny if not the owner, or if other people are going
-      party.owner isnt userId or attending(party) > 0
-    )
+    false
 
 Meteor.methods
 
@@ -74,7 +69,9 @@ Meteor.methods
     throw new Meteor.Error(403, "You must be logged in to vote up")  unless @userId
     deal = Deals.findOne(dealId)
     throw new Meteor.Error(404, "No such deal") unless deal
+    throw new Meteor.Error(400, "You already voted") if deal.userIds.indexOf(userId) != -1
     Deals.update(dealId, {
+      $inc: {votes: 1}
       $addToSet: {userIds: userId}
     })
 

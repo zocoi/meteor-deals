@@ -83,10 +83,9 @@
   }
 
   .deal_image img {
-/*    max-width: 100px;
-    max-height: 100px;*/
     display: none;
   }
+  
   .title { color: #0185C6; }
 
   .price {
@@ -96,4 +95,9 @@
   .from_price {
     text-decoration: line-through;
     color: #949494;
+  }
+  
+  .user_avatars {
+    min-width: 60px;
+    max-width: 150px;
   }
