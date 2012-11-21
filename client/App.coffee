@@ -5,9 +5,9 @@ Autosubscription
 Meteor.autosubscribe ->
   Meteor.subscribe("deals")
   Meteor.subscribe("users")
-  # Meteor.subscribe("events")
+  Meteor.subscribe("events")
   
-  Events.find({}).observe
+  Events.find({createdAt : {$gt: +(new Date) - 60 * 60000}}).observe
     added: (event, beforeIndex) ->
       console.log  event
       user = Meteor.users.findOne event.userId
@@ -50,7 +50,7 @@ Tempates
 Template.index.events({
   "submit #deal-form": ->
     obj = {}
-    for el in $('#deal_form').serializeArray()
+    for el in $('#deal-form').serializeArray()
       obj[el.name] = el.value
     Meteor.call "createDeal", obj, Meteor.userId()
     return false

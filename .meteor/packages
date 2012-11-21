@@ -9,8 +9,8 @@ coffeescript
 accounts-ui
 bootstrap
 jquery
+sugar
+madewith
 accounts-base
 accounts-facebook
 accounts-twitter
-sugar
-madewith

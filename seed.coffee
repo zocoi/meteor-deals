@@ -71,5 +71,5 @@ getGrouponGoodsDeals = ()->
 if Meteor.isServer
   Meteor.startup ->
     # seed()
-    getGrouponGoodsDeals()
+    # getGrouponGoodsDeals()
     # code to run on server at startup
