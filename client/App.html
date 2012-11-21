@@ -55,7 +55,7 @@
     {{/each}}
   </table>
   
-  <form class="form-horizontal" id="deal_form">
+  <form class="form-horizontal" id="deal-form">
     <fieldset>
       <legend>Know an online deal? Share it</legend>
       <div class="control-group">
@@ -91,7 +91,7 @@
       </div>
     </fieldset>
   </form>
-  {{> gritter}}
+  {{> shoutbox}}
 </template>
 
 <template name="entry">
@@ -121,22 +121,13 @@
   </tr> 
 </template>
 
-<template name="gritter">
-</template>
-<template name="abc">
-  <div id="gritter-notice-wrapper">
-    <div id="gritter-item-1" class="gritter-item-wrapper my-sticky-class" style="">
-      <div class="gritter-top"></div>
-      <div class="gritter-item">
-        <div class="gritter-close" style="display: none;"></div>
-        <img src="http://s3.amazonaws.com/twitter_production/profile_images/132499022/myface_bigger.jpg" class="gritter-image">
-        <div class="gritter-with-image">
-          <span class="gritter-title">This is a sticky notice!</span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" style="color:#ccc">magnis dis parturient</a> montes, nascetur ridiculus mus.</p>
-        </div>
-        <div style="clear:both"></div>
+<template name="shoutbox">
+  <div class="shoutbox">
+    <form class="well shoutbox-form">
+      <div class="input-append">
+        <input class="input-medium" id="shoutbox-input" type="text" placeholder="Shout to other online users">
+        <button class="btn" type="submit">Shout!</button>
       </div>
-      <div class="gritter-bottom"></div>
-    </div>
+    </form>
   </div>
 </template>

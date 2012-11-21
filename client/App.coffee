@@ -12,11 +12,14 @@ Meteor.autosubscribe ->
       console.log  event
       user = Meteor.users.findOne event.userId
       deal = Deals.findOne event.dealId
-      return null unless user and deal
-      action = "liked"
-      action = "commented" if event.message?
+      return null unless user
+      text = "<strong>#{displayName(user)}</strong>"
+      if event.message?
+        text += " comment: #{event.message}"
+      else
+        text += " liked <a href=\"##{deal._id}\">#{deal.title.truncate(100)}</a>"
       $.gritter.add
-        text: "<strong>#{displayName(user)}</strong> #{action} <a href=\"##{deal._id}\">#{deal.title.truncate(100)}</a>"
+        text: text
         image: avatarUrl(user)
         time: 5000
 ###
@@ -45,12 +48,10 @@ Tempates
 
 # index
 Template.index.events({
-  "submit #deal_form": ->
-    value = $("#text-input").val()
+  "submit #deal-form": ->
     obj = {}
     for el in $('#deal_form').serializeArray()
       obj[el.name] = el.value
-    console.log obj
     Meteor.call "createDeal", obj, Meteor.userId()
     return false
 })
@@ -89,4 +90,14 @@ Template.entry.latestUsers = ()->
     []
 
 Template.entry.avatarUrl = ()->
-  avatarUrl(this)  
+  avatarUrl(this)
+
+# Shoutbox
+Template.shoutbox.events
+  "submit .shoutbox-form": (event)->
+    console.log event
+    message = $("#shoutbox-input").val()
+    $("#shoutbox-input").val(null)
+    Meteor.call "createEvent", {message:message}, Meteor.userId()
+    return false
+

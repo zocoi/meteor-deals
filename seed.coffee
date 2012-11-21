@@ -44,14 +44,32 @@
 #         votes: 0
 #         userIds: []
 #       Deals.insert(obj)
+getGrouponGoodsDeals = ()->
+  Meteor.http.get "http://api.groupon.com/v2/deals?client_id=05c5a7da5a462284c60eb8c091a2eaec16abb1a1&channel_id=goods", {}, (error, result)->
+    deals = result.data.deals
+    console.log deals.length
+    for deal in deals
+      if deal.status == "open" and not Deals.findOne(deal.id)
+        console.log deal.options
+        obj =
+          id: deal.id
+          title: deal.title
+          url: deal.dealUrl
+          price: deal.options[0].price.amount / 100 if deal.options[0]?.price?.amount
+          fromPrice: deal.options[0].value.amount /100 if deal.options[0]?.value?.amount
+          description: deal.highlightsHtml.stripTags()
+          photoUrl: deal.largeImageUrl
+          division: deal.division
+          votes: 0
+          userIds: []
+        Deals.insert(obj)
 
-emptyDeals = () ->
-	Deals.remove({})
+# emptyTables = () ->
+#   Deals.remove({})
+#   Events.remove({})
 
 if Meteor.isServer
-  
   Meteor.startup ->
-    # emptyDeals()
     # seed()
-    # getExternalDeals()
+    getGrouponGoodsDeals()
     # code to run on server at startup

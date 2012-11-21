@@ -128,3 +128,12 @@ hr.soften {
     max-width: 310px;
   }
     .user_avatars img { width: 50px; height: 50px; }
+
+.shoutbox {
+  position:fixed;
+  bottom:0px;
+  right:10px;
+  width:301px;
+  z-index:9999;
+}
+  #shoutbox-input {width: 180px;}

@@ -10,10 +10,9 @@ Events.allow
 Meteor.methods
   createEvent: (options, userId) ->
     options = options or {}
-    for name in ["dealId"]
-      throw new Meteor.Error(400, "Required parameter missing: #{name}") unless typeof options[name] is "string" and options[name].length
+    throw new Meteor.Error(400, "Required parameter missing") unless typeof options.dealId or userId
     throw new Meteor.Error(403, "You must be logged in") unless userId
-    console.log Events.insert
+    Events.insert
       userId: userId
       dealId: options.dealId
       message: options.message
