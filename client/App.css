@@ -62,9 +62,34 @@
   opacity: .4;
 }
 
+/* Faded out hr */
+hr.soften {
+  height: 1px;
+  margin: 70px 0;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.1), rgba(0,0,0,0));
+  border: 0;
+}
 
+.footer {
+  padding: 70px 0;
+  margin-top: 70px;
+  border-top: 1px solid #e5e5e5;
+  background-color: #f5f5f5;
+}
+.footer p {
+  margin-bottom: 0;
+  color: #777;
+}
 
 /* CSS declarations go here */
+
+
+.brand { font-family: 'Gloria Hallelujah', cursive; }
+
+.dear_santa { font-family: 'Gloria Hallelujah', cursive; }
 
 #login-sign-in-link {
   float: none;
@@ -90,6 +115,7 @@
 
   .price {
     color: #89B556;
+    font-weight:bold;
   }
   
   .from_price {
@@ -99,6 +125,6 @@
   
   .user_avatars {
     min-width: 60px;
-    max-width: 150px;
+    max-width: 310px;
   }
     .user_avatars img { width: 50px; height: 50px; }

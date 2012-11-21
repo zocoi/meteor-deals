@@ -4,7 +4,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-
+  <link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+  <link href="jquery.gritter.css" rel="stylesheet" type='text/css'>
+  <script type="text/javascript" src="jquery.gritter.min.js"></script>
 </head>
 
 <body>
@@ -18,6 +20,12 @@
   <div class="container">
     {{> index}}
   </div>
+  <footer class="footer">
+    <div class="container">
+      <p class="pull-right"><a href="#">Back to top</a></p>
+      <p>Built with love in San Francisco by <a href="https://www.facebook.com/hung.dao" target="_blank">Hung Dao</a>.</p>
+    </div>
+  </footer>
 </body>
 
 
@@ -38,13 +46,15 @@
       <p class="lead">Or a simplified gift request from mankind to Santa</p>
     </div>
   </header>
-  <h1 id="dear_santa">Dear Santa</h1>
-  <p>I have been very good this year. Here is my wish list. Also with deals to save your money.</p>
+  <hr class="soften">
+  <h1 class="dear_santa">Dear Santa</h1>
+  <p class="dear_santa lead">I have been very good this year. Here is my wish list. Also with deals to save your money...</p>
   <table class="table table-hover">
     {{#each deals}}
       {{> entry}}
     {{/each}}
   </table>
+  
   <form class="form-horizontal" id="deal_form">
     <fieldset>
       <legend>Know an online deal? Share it</legend>
@@ -81,11 +91,11 @@
       </div>
     </fieldset>
   </form>
-
+  {{> gritter}}
 </template>
 
 <template name="entry">
-  <tr class="deal">
+  <tr class="deal" id="{{_id}}">
     <td class="deal_image">
       <a href="{{url}}" target="_blank">
         <div class="img-polaroid" style="background-image: url({{photoUrl}})"></div>
@@ -109,4 +119,24 @@
       {{/each}}
     </td>
   </tr> 
+</template>
+
+<template name="gritter">
+</template>
+<template name="abc">
+  <div id="gritter-notice-wrapper">
+    <div id="gritter-item-1" class="gritter-item-wrapper my-sticky-class" style="">
+      <div class="gritter-top"></div>
+      <div class="gritter-item">
+        <div class="gritter-close" style="display: none;"></div>
+        <img src="http://s3.amazonaws.com/twitter_production/profile_images/132499022/myface_bigger.jpg" class="gritter-image">
+        <div class="gritter-with-image">
+          <span class="gritter-title">This is a sticky notice!</span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" style="color:#ccc">magnis dis parturient</a> montes, nascetur ridiculus mus.</p>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+      <div class="gritter-bottom"></div>
+    </div>
+  </div>
 </template>

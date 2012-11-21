@@ -1,6 +1,7 @@
 Deals = new Meteor.Collection("deals")
 
-# Deals._ensureIndex 'userIds', {unique: 1, sparse: 1}
+if Meteor.isServer
+  Deals._ensureIndex 'id', {unique: 1, sparse: 1}
 
 Deals.allow
   insert: () ->
@@ -21,16 +22,11 @@ Deals.allow
     false
 
 Meteor.methods
-
   createDeal: (options, userId) ->
     options = options or {}
     console.log "options", options
     for name in ["title", "description", "url", "price", "photoUrl"]
-      throw new Meteor.Error(400, "Required parameter missing: #{name}") if options[name] is null 
-      # typeof options.description is "string" and options.description.length and 
-      # typeof options.url is "string" and options.url.length and 
-      # typeof options.price is "number" and options.price >= 0 and 
-      # typeof options.photoUrl is "string" and options.photoUrl.length
+      throw new Meteor.Error(400, "Required parameter missing: #{name}") unless typeof options[name] is "string" and options[name].length
     throw new Meteor.Error(403, "You must be logged in")  unless userId
     Deals.insert
       title: options.title
@@ -75,13 +71,3 @@ Meteor.methods
       $inc: {votes: 1}
       $addToSet: {userIds: userId}
     })
-
-# Users
-displayName = (user) ->
-  return user.profile.name  if user.profile and user.profile.name
-  user.emails[0].address
-
-contactEmail = (user) ->
-  return user.emails[0].address  if user.emails and user.emails.length
-  return user.services.facebook.email  if user.services and user.services.facebook and user.services.facebook.email
-  null
